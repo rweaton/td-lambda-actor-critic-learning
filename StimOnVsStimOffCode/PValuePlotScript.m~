@@ -1,0 +1,40 @@
+% Plot pValues script
+
+pValueFloor = 1e-3;
+pValueCeiling = 1e-2;
+
+Range = log(pValueCeiling/pValueFloor);
+
+XVec = KStestStruct.SlidingWindowCenters;
+YVec = ones(size(XVec));
+pVec = KStestStruct.CorrespondingPValues;
+
+nEntries = length(pVec);
+ColorVec = NaN*ones(size(pVec));
+
+figure; hold on;
+
+for i = 1:nEntries
+    
+        if (pVec(i) > pValueCeiling)
+
+            ColorVec(i) = 1;
+            
+        end
+
+        if (pVec(i) <= pValueFloor)
+
+            ColorVec(i) = 0.5;
+            
+        end
+        
+        if (pVec(i) < pValueCeiling)&(pVec(i) > pValueFloor)
+            
+            %ColorVec(i) = -log(pVec(i));
+            
+        end
+            
+    bar(XVec(i), YVec(i), 'FaceColor', [ColorVec(i), ColorVec(i), ColorVec(i)],...
+        'EdgeColor', 'none', 'BarWidth', 1);
+    
+end

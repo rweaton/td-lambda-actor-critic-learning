@@ -1,0 +1,26 @@
+function OutputStruct = TDLambda_ActorCriticSimulator(StatesList, ActionsList, nIterationsPerEpisode, nEpisodes, params)
+
+    epsilon_Critic = params(1);
+    epsilon_Actor = params(2);
+    beta_SoftMax = params(3);
+    gamma_discount = params(4);
+    
+    
+    [nElements, nStates] = size(StatesList);
+    nActions = length(ActionsList);
+    
+    % Initialize Arrays
+    StateIndices = NaN*ones([nIterationsPerEpisode, nEpisodes]);
+    
+    CriticWeightsArray = NaN*ones([nStates, nIterationsPerEpisode, nEpisodes]);
+    ActionMatrixArray = NaN*ones([nActions, nStates, nIterationsPerEpisode, nEpisodes]);
+    ExpectedRewardsArray = NaN*ones([nIterationsPerEpisode, nEpisodes]);
+    RewardsArray = NaN*ones([nIterationsPerEpisode, nEpisodes]);
+    
+    ProbabilitiesArray = NaN*ones([nActions, nIterationsPerEpisode, nEpisodes]);
+    
+    % Initialize Eligibility Traces
+    CriticEligibilityTraces = NaN*ones([nStates, nIterationsPerEpisode, nEpisodes]);
+    StateActionPairEligibilityTraces = NaN*ones([]);
+    
+end
